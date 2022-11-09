@@ -69,7 +69,7 @@ class ProductRetrieveUpdateCreation(RetrieveUpdateDestroyAPIView):
             product = response.data
             cache.set("product_data_%s" % product["id"], {
                 "name": product["name"],
-                "description": product["description",
-                "price": product["price"]]
+                "description": product["description"],
+                "price": product["price"]
             })
         return response
