@@ -8,7 +8,7 @@ from store import views, api_views
 urlpatterns = [
     path('api/v1/products/', api_views.ProductList.as_view()),
     path('api/v1/products/new/', api_views.ProductCreation.as_view()),
-    path('api/v1/products/<int:id>/', api_views.ProductRetrieveUpdateCreation.as_view()),
+    path('api/v1/products/<int:id>/', api_views.ProductRetrieveUpdateDestroy.as_view()),
     path('api/v1/products/<int:id>/stats', api_views.ProductStats.as_view()),
 
     path('admin/', admin.site.urls),

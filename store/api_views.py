@@ -50,7 +50,7 @@ class ProductCreation(CreateAPIView):
         return super().create(request, *args, **kwargs)
 
 
-class ProductRetrieveUpdateCreation(RetrieveUpdateDestroyAPIView):
+class ProductRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     lookup_field = "id"
     serializer_class = ProductSerializer
