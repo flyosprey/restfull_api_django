@@ -22,13 +22,13 @@ class ProductSerializer(serializers.ModelSerializer):
     )
     sale_start = serializers.DateTimeField(
         required=False,
-        input_formats=["%I:%M %p %d %B %Y"], format=None, allow_null=True,
+        input_formats=["%I:%M %p %d %B %Y"], format="%I:%M %p %d %B %Y", allow_null=True,
         help_text="Accepted format is '12:01 PM 16 April 2019'",
         style={"input_type": "text", "placeholder": "11:05 AM 09 July 2020"}
     )
     sale_end = serializers.DateTimeField(
         required=False,
-        input_formats=["%I:%M %p %d %B %Y"], format=None, allow_null=True,
+        input_formats=["%I:%M %p %d %B %Y"], format="%I:%M %p %d %B %Y", allow_null=True,
         help_text="Accepted format is '12:01 PM 16 April 2019'",
         style={"input_type": "text", "placeholder": "11:05 AM 09 July 2020"}
     )
@@ -50,7 +50,12 @@ class ProductSerializer(serializers.ModelSerializer):
             instance.description += b": ".join(
                 validated_data["warranty"].readlines()
             ).decode()
-        return instance
+        return super().update(instance, validated_data)
+
+    def create(self, validated_data):
+        validated_data.pop('warranty')
+        return Product.objects.create(**validated_data)
+
 
 
 class ProductStatSerializer(serializers.Serializer):
